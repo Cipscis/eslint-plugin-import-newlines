@@ -46,6 +46,9 @@ ruleTester.run('enforce', rule, {
       code: "import * as test from './test'",
     },
     {
+      code: "import a, * as b from './test'",
+    },
+    {
       code: "import './test.css'",
     },
     {
@@ -194,6 +197,18 @@ ruleTester.run('enforce', rule, {
       code: `import ${repeatString('a', 73)} from './${repeatString('a', 73)}';`,
       options: [{
         'max-len': 140,
+      }],
+    },
+    {
+      code: `import * as test from './${repeatString('a', 50)}'`,
+      options: [{
+        'max-len': 50,
+      }],
+    },
+    {
+      code: `import a, * as b from './${repeatString('a', 50)}'`,
+      options: [{
+        'max-len': 50,
       }],
     },
   ],
