@@ -191,6 +191,19 @@ import App from './App'
         semi: false,
       }],
     },
+    {
+      code: `import {
+\ta,
+\tb,
+\tc,
+\td
+\t// @ts-ignore
+} from 'package-without-types'`,
+      options: [{
+        items: 3,
+        'max-len': 50,
+      }],
+    },
   ],
 
   invalid: [
@@ -362,6 +375,20 @@ import {\na,\nb,\nc,\nd,\ne\n} from './App'
         items: 2,
       }],
       errors: [{ messageId: 'mustSplitMany' }],
+    },
+    {
+      code: `import type {
+a,
+b,
+c,
+// @ts-ignore
+} from 'package-without-types';`,
+      output: `// @ts-ignore
+import type { a, b, c } from 'package-without-types';`,
+      options: [{
+        items: 4,
+      }],
+      errors: [{ messageId: 'mustNotSplit' }],
     },
   ],
 });

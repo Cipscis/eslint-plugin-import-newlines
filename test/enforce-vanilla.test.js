@@ -235,6 +235,21 @@ import App from './App'
         semi: false,
       }],
     },
+    {
+      code: `import {
+\ta,
+\tb,
+\tc,
+\td
+\t/*
+\t * block comment
+\t */
+} from './file'`,
+      options: [{
+        items: 3,
+        'max-len': 50,
+      }],
+    },
   ],
 
   invalid: [
@@ -403,6 +418,24 @@ import {\na,\nb,\nc,\nd,\ne\n} from './App'
         items: 2,
       }],
       errors: [{ messageId: 'mustSplitMany' }],
+    },
+    {
+      code: `import {
+a,
+b,
+c
+/*
+ * block comment
+ */
+} from './file';`,
+      output: `/*
+ * block comment
+ */
+import { a, b, c } from './file';`,
+      options: [{
+        items: 4,
+      }],
+      errors: [{ messageId: 'mustNotSplit' }],
     },
   ],
 });
