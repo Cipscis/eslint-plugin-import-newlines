@@ -211,6 +211,30 @@ ruleTester.run('enforce', rule, {
         'max-len': 50,
       }],
     },
+    {
+      code: `import React from 'react'
+// leading comment
+import App from './App'
+
+/**
+ * doc comment
+ */
+;(function iife() {})()`,
+      options: [{
+        semi: false,
+      }],
+    },
+    {
+      code: `import React from 'react'
+// leading comment
+import App from './App'
+
+// line comment
+;(function iife() {})()`,
+      options: [{
+        semi: false,
+      }],
+    },
   ],
 
   invalid: [
@@ -335,6 +359,48 @@ ruleTester.run('enforce', rule, {
         items: 0,
         'max-len': 140,
         semi: true,
+      }],
+      errors: [{ messageId: 'mustSplitMany' }],
+    },
+    {
+      code: `import React from 'react'
+// leading comment
+import {a,b,c,d,e} from './App'
+
+/**
+ * doc comment
+ */
+;(function iife() {})()`,
+      output: `import React from 'react'
+// leading comment
+import {\na,\nb,\nc,\nd,\ne\n} from './App'
+
+/**
+ * doc comment
+ */
+;(function iife() {})()`,
+      options: [{
+        semi: false,
+        items: 2,
+      }],
+      errors: [{ messageId: 'mustSplitMany' }],
+    },
+    {
+      code: `import React from 'react'
+// leading comment
+import {a,b,c,d,e} from './App'
+
+// line comment
+;(function iife() {})()`,
+      output: `import React from 'react'
+// leading comment
+import {\na,\nb,\nc,\nd,\ne\n} from './App'
+
+// line comment
+;(function iife() {})()`,
+      options: [{
+        semi: false,
+        items: 2,
       }],
       errors: [{ messageId: 'mustSplitMany' }],
     },
