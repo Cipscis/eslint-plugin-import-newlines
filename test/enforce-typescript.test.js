@@ -204,6 +204,15 @@ import App from './App'
         'max-len': 50,
       }],
     },
+    {
+      code: `declare module '*.svg' {
+  import * as React from 'react'
+
+  const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>
+  export default content
+}`,
+      options: [],
+    },
   ],
 
   invalid: [
