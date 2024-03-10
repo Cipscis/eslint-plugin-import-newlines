@@ -148,6 +148,10 @@ and the result would fit within the configured `max-length`. This can be set to 
 to be able to break imports up to multiple lines without the plugin reporting an error and offering
 an autofix.
 
+#### `allowBlankLines` [boolean] (default: `false`)
+
+Allows imports to contain blank lines. Blank lines will still be removed when applying an autofix for any other reason, but if this option is set to `true` they won't cause the plugin to report an error.
+
 ### Testing
 
 Tests can be run via `npm run test`, make sure these pass after every change. Be sure to add tests

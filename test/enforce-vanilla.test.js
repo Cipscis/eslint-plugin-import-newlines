@@ -250,6 +250,38 @@ import App from './App'
         'max-len': 50,
       }],
     },
+    {
+      code: "import { \na,\n\nb,\n\n\nc,\n\n\nd,\n\n\n\ne\n} from './test'",
+      output: "import {\na,\nb,\nc,\nd,\ne\n} from './test'",
+      options: [{
+        items: 4,
+        allowBlankLines: true,
+      }],
+    },
+    {
+      code: "import { a,\n\n\nb } from './test'",
+      output: "import {\na,\nb\n} from './test'",
+      options: [{
+        items: 1,
+        allowBlankLines: true,
+      }],
+    },
+    {
+      code: "import {\n\na,\nb\n\n\n} from './test'",
+      output: "import {\na,\nb\n} from './test'",
+      options: [{
+        items: 1,
+        allowBlankLines: true,
+      }],
+    },
+    {
+      code: "import {\na, b, c\n} from './test'",
+      output: "import {\na,\nb,\nc\n} from './test'",
+      options: [{
+        items: 1,
+        allowBlankLines: true,
+      }],
+    },
   ],
 
   invalid: [
